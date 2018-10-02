@@ -1,4 +1,4 @@
-# Personal React Boilerplate
+# Unsplash React Photo Finder
 
 ## Build Setup
 
