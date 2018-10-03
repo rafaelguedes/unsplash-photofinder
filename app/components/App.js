@@ -13,10 +13,6 @@ class App extends React.Component {
     }
   }
 
-  handleResults = (results) => {
-    this.setState(() => ({results: results}));
-  }
-
   render() {
     return (
       <Router>

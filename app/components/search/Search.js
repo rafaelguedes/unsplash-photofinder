@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from './Button';
 import './search.css';
-import { getPhotosByKeyword } from '../../utils/api';
 
 class Search extends React.Component {
     constructor(props) {
@@ -16,14 +15,6 @@ class Search extends React.Component {
         const value = event.target.value
         this.setState(() => ({term: value}));
     }
-    
-    queryForPhotos = async (query) => {
-        if(query !== '') {
-            const photos = await getPhotosByKeyword(query);
-            this.setState(() => ({results: photos}));
-            this.props.resultsCallback(this.state.results);
-        }
-    }
 
     render() {
         return (
@@ -33,7 +24,7 @@ class Search extends React.Component {
                     placeholder='Please, search an image'
                     value={this.state.term}
                     onChange={this.handleChange}/>
-                <Button onClick={() => this.queryForPhotos(this.state.term)}/>
+                <Button onClick={() => this.props.query(this.state.term)}/>
             </div> 
         );
     }

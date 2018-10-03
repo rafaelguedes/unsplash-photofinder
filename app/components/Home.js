@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header/Header';
 import Results from './results/Results';
+import { getPhotosByKeyword } from '../utils/api';
 
 class Home extends React.Component {
 
@@ -11,14 +12,18 @@ class Home extends React.Component {
     }
   }
 
-  handleResults = (results) => {
-    this.setState(() => ({results: results}));
+
+  queryForPhotos = async (query) => {
+    if(query !== '') {
+        const photos = await getPhotosByKeyword(query);
+        this.setState(() => ({results: photos}));
+    }
   }
 
   render() {
     return (
         <div className='container'>
-            <Header resultsCallback={this.handleResults}/>
+            <Header query={this.queryForPhotos}/>
             <Results history={this.props.history} results={this.state.results}/>  
         </div>
     );
